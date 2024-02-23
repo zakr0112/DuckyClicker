@@ -14,7 +14,7 @@ Things you will require
 
 * Python (latest)
 * an IDE 
-* Speaker and or soundcard for audio
+* Speaker / soundcard for audio
 
 ### Installation
 
@@ -22,8 +22,8 @@ Step by step installation
 
 ```
 $ Download the git project as a zip file
-$ Open the latest release exe
-$ Play the game
+$ Open and extract the zip
+$ double click to open "BetaBreaker.exe"
 ```
 
 ## Additional Information
