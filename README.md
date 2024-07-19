@@ -1,28 +1,32 @@
 # Ducky Clicker
 
-Ducky clicker is a new in development game, created in python with the idea of making as much money\
-as you can, to upgrade the duck and unlock new outfits!
+Ducky clicker is a 2D "Money Clicker" style game, created in python with pygame\
+with the main goal being tapping the duck to increase your money, and use gold for upgrades\
+to change your ducks appearance!
 
 ## Getting Started
 
-You can download the project as a zip file, which can then be compiled with your favourite\
-version of IDE for python
+The project download is under beta and then the exe is available to download packaged as a zip file\
+you simply unzip into a folder on your desktop (or file environment), and open the exe file\
 
-### Prerequisites
+Because this is packaged as an exe, this should eliminate the need to install extra libraries as they\
+should already come included!
+
+## Prerequisites
 
 Things you will require
 
-* Python (latest)
-* an IDE 
-* Speaker / soundcard for audio
+* Python **[download](https://www.python.org/downloads/)**
+* Either the python intrepreter, or another **[IDE](https://www.simplilearn.com/tutorials/python-tutorial/python-ide#top_python_ides)**
+* Speakers / soundcard for audio, or any compatible audio device
 
-### Installation
+## Installation
 
 Step by step installation
 
 ```
 $ Download the git project as a zip file
-$ Open and extract the zip
+$ Open and extract the zip to a folder
 $ double click to open "BetaBreaker.exe"
 ```
 
