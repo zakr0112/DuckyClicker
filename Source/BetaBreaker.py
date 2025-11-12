@@ -46,6 +46,8 @@ from io import BytesIO
 from PIL import Image
 import urllib3
 
+pygame.init()
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def load_image_from_url(url):
@@ -111,7 +113,6 @@ screen.fill(background_color)
 
 
 # Initialize pygame
-pygame.init()
 pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (11/11/2025)")
 
 
@@ -224,7 +225,7 @@ for url in sound_urls:
     if sound:
         sounds.append(sound)
 # Example: Play first sound
-sounds[0].play()
+#sounds[0].play()
 
 
 
