@@ -42,8 +42,39 @@ import os
 import requests
 import io
 from PIL import Image
+from io import BytesIO
+from PIL import Image
+import urllib3
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+def load_image_from_url(url):
+    try:
+        response = requests.get(url, verify=False, timeout=10)
+        response.raise_for_status()
+        return pygame.image.load(io.BytesIO(response.content))
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to load image from {url}: {e}")
+        return None
+
+    
+
+# IMAGE URLS ONLINE
+image_urls = {
+    "icon": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "duck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "dps1": "https://i.postimg.cc/5NbfnW72/Dps1.png",
+    "dps2": "https://i.postimg.cc/8PNTtgKP/Dps2.png",
+    "dps3": "https://i.postimg.cc/WbTsXcWp/Dps3.png",
+    "dps4": "https://i.postimg.cc/KvxmJhqZ/Dps4.jpg",
+    "dps5": "https://i.postimg.cc/RV4vXxsm/Dps5.png",
+    "defaultduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "demolitionduck": "https://i.postimg.cc/0j6D4J2b/2Demolition_Duck.png",
+    "dapperduck": "https://i.postimg.cc/VvSnhbLS/3Dapper_Duck.png",
+    "daredevilduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "donnerduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "demonduck": "https://i.postimg.cc/T1ygsWY1/6Demon_Duck.png"
+}
 
 #Game screen creation
 screen_width = 1900
@@ -91,29 +122,6 @@ dps5_upgrade_clicks = 0
 current_gold_increase_factor = 0
 last_gold_increase = 0
 last_gold_increase_factor = 0
-
-# IMAGE URLS ONLINE
-image_urls = {
-    "icon": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "duck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "dps1": "https://i.postimg.cc/5NbfnW72/Dps1.png",
-    "dps2": "https://i.postimg.cc/8PNTtgKP/Dps2.png",
-    "dps3": "https://i.postimg.cc/WbTsXcWp/Dps3.png",
-    "dps4": "https://i.postimg.cc/KvxmJhqZ/Dps4.jpg",
-    "dps5": "https://i.postimg.cc/RV4vXxsm/Dps5.png",
-    "defaultduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "demolitionduck": "https://i.postimg.cc/0j6D4J2b/2Demolition_Duck.png",
-    "dapperduck": "https://i.postimg.cc/VvSnhbLS/3Dapper_Duck.png",
-    "daredevilduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "donnerduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "demonduck": "https://i.postimg.cc/T1ygsWY1/6Demon_Duck.png"
-}
-
-
-def load_image_from_url(url):
-    response = requests.get(url)
-    return pygame.image.load(io.BytesIO(response.content))
-
 
 # Load the duck image
 duck_img = load_image_from_url(image_urls["duck"])
