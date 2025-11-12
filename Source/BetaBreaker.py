@@ -57,7 +57,20 @@ def load_image_from_url(url):
         print(f"Failed to load image from {url}: {e}")
         return None
 
-    
+
+def load_sound_from_url(url):
+    try:
+        response = requests.get(url, verify=False, timeout=10)
+        response.raise_for_status()
+        return pygame.mixer.Sound(io.BytesIO(response.content))
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to load sound from {url}: {e}")
+        return None
+    except pygame.error as pe:
+        print(f"Pygame failed to load sound from {url}: {pe}")
+        return None
+
+
 
 # IMAGE URLS ONLINE
 image_urls = {
@@ -197,22 +210,19 @@ if Gold >= dps5_upgrade_cost:
     Gold -= dps5_upgrade_cost
     dps5_upgrade_cost = dps5_upgrade_cost + dps5_original_upgrade_cost  # Increase the cost for the next upgrade
 
-# Load the sounds
+# Loads the music
 pygame.mixer.init()
 sound_urls = [
-    "https://jumpshare.com/share/o95iVWkbYc8sn7i43Xog",
-    "https://jumpshare.com/share/XbMuRjr2ybG5v3CV3GYi",
-    "https://jumpshare.com/share/JzeMYFRz2PxgBKj2qCAE"
+    "https://od.lk/s/MzFfOTIwOTY4NDJf/Symbolism%20%281%29.mp3",
+    "https://od.lk/s/MzFfOTIwOTY4Mjlf/Symbolism2.mp3",
+    "https://od.lk/s/MzFfOTIwOTY4MzZf/Symbolism3.mp3"
 ]
-
-
 
 sounds = []
 for url in sound_urls:
-    response = requests.get(url)
-    sound = pygame.mixer.Sound(io.BytesIO(response.content))
-    sounds.append(sound)
-
+    sound = load_sound_from_url(url)
+    if sound:
+        sounds.append(sound)
 # Example: Play first sound
 sounds[0].play()
 
