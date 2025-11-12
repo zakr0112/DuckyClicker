@@ -43,6 +43,7 @@ from PIL import Image
 from io import BytesIO
 from PIL import Image
 import urllib3
+import threading
 
 pygame.init()
 pygame.mixer.init()
@@ -50,12 +51,15 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def load_image_from_url(url):
     try:
-        response = requests.get(url, verify=False, timeout=10)
+        response = requests.get(url, verify=False, timeout=5)
         response.raise_for_status()
-        return pygame.image.load(io.BytesIO(response.content))
-    except requests.exceptions.RequestException as e:
-        print(f"Failed to load image from {url}: {e}")
-        return None
+        return pygame.image.load(io.BytesIO(response.content)).convert_alpha()
+    except Exception as e:
+        print(f"[WARN] Failed to load image from {url}: {e}")
+        # create a red placeholder surface
+        surf = pygame.Surface((250, 250))
+        surf.fill((255, 100, 100))
+        return surf
 
 
 def load_sound_from_url(url):
@@ -88,6 +92,25 @@ image_urls = {
     "donnerduck": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
     "demonduck": "https://i.ibb.co/1GS4Lw9Z/6-Demon-Duck.png"
 }
+"""
+dps_images = {
+    "dps1": pygame.transform.scale(load_image_from_url(image_urls["dps1"]), (int(184 * 1.823), int(96 / 3.87))),
+    "dps2": pygame.transform.scale(load_image_from_url(image_urls["dps2"]), (int(184 * 1.815), int(96 / 4.04))),
+    "dps3": pygame.transform.scale(load_image_from_url(image_urls["dps3"]), (int(184 * 1.578), int(96 / 3.52))),
+    "dps4": pygame.transform.scale(load_image_from_url(image_urls["dps4"]), (int(184 / 1.361), int(96 / 7.3))),
+    "dps5": pygame.transform.scale(load_image_from_url(image_urls["dps5"]), (int(184 * 3.135), int(96 / 1.755))),
+}
+
+# Duck images
+duck_images = {
+    "default": pygame.transform.scale(load_image_from_url(image_urls["defaultduck"]), (250, 250)),
+    "demolition": pygame.transform.scale(load_image_from_url(image_urls["demolitionduck"]), (250, 250)),
+    "dapper": pygame.transform.scale(load_image_from_url(image_urls["dapperduck"]), (250, 250)),
+    "daredevil": pygame.transform.scale(load_image_from_url(image_urls["daredevilduck"]), (250, 250)),
+    "donner": pygame.transform.scale(load_image_from_url(image_urls["donnerduck"]), (250, 250)),
+    "demon": pygame.transform.scale(load_image_from_url(image_urls["demonduck"]), (250, 250)),
+}
+"""
 
 # Load the music
 sound_urls = [
@@ -118,28 +141,75 @@ pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (12/11/2025)")
 
 
 print("Loading Images... Please Wait")
+pygame.display.update()
 
-duck_images = {
-    "default": load_image_from_url(image_urls["defaultduck"]),
-    "demolition": load_image_from_url(image_urls["demolitionduck"]),
-    "dapper": load_image_from_url(image_urls["dapperduck"]),
-    "daredevil": load_image_from_url(image_urls["daredevilduck"]),
-    "donner": load_image_from_url(image_urls["donnerduck"]),
-    "demon": load_image_from_url(image_urls["demonduck"]),
-}
+loading_font = pygame.font.Font(None, 50)
+y_offset = 400
 
-# Load and display the games icon as a Duck (TASKBAR WILL WORK WHEN EXPORTED AS EXE FILE)
-gameIcon = duck_images["default"]
-if gameIcon:
-    pygame.display.set_icon(gameIcon)
+def load_image_from_url(url):
+    """Load online image with short timeout, no caching, and in-memory only."""
+    try:
+        response = requests.get(url, verify=False, timeout=5)
+        response.raise_for_status()
+        return pygame.image.load(io.BytesIO(response.content)).convert_alpha()
+    except Exception as e:
+        print(f"[WARN] Failed to load image from {url}: {e}")
+        # red placeholder surface for missing image
+        surf = pygame.Surface((250, 250))
+        surf.fill((255, 100, 100))
+        return surf
 
-dps_images = {
-    1: load_image_from_url(image_urls["dps1"]),
-    2: load_image_from_url(image_urls["dps2"]),
-    3: load_image_from_url(image_urls["dps3"]),
-    4: load_image_from_url(image_urls["dps4"]),
-    5: load_image_from_url(image_urls["dps5"]),
-}
+# Initialize image dictionaries
+duck_images = {}
+dps_images = {}
+
+# Duck list (name, url key)
+duck_list = [
+    ("default", "defaultduck"),
+    ("demolition", "demolitionduck"),
+    ("dapper", "dapperduck"),
+    ("daredevil", "daredevilduck"),
+    ("donner", "donnerduck"),
+    ("demon", "demonduck"),
+]
+
+# DPS list (name, url key, w_scale, h_scale)
+dps_list = [
+    ("dps1", "dps1", 1.823, 3.87),
+    ("dps2", "dps2", 1.815, 4.04),
+    ("dps3", "dps3", 1.578, 3.52),
+    ("dps4", "dps4", 1 / 1.361, 7.3),
+    ("dps5", "dps5", 3.135, 1.755),
+]
+
+# Unified loader for ducks and DPS
+for name, key in duck_list + [d[:2] for d in dps_list]:
+    text = loading_font.render(f"Loading {name.title()}...", True, (0, 0, 255))
+    screen.fill((255, 255, 255))
+    screen.blit(text, (screen_width // 2 - 200, y_offset))
+    pygame.display.update()
+    pygame.event.pump()  # keeps the window responsive
+
+    img = load_image_from_url(image_urls[key])
+    if name.startswith("dps"):
+        # find its scaling info
+        _, _, w_scale, h_scale = next(d for d in dps_list if d[0] == name)
+        new_w = int(img.get_width() * w_scale)
+        new_h = int(img.get_height() / h_scale)
+        img = pygame.transform.scale(img, (new_w, new_h))
+        dps_images[name] = img
+    else:
+        img = pygame.transform.scale(img, (250, 250))
+        duck_images[name] = img
+
+    y_offset += 50
+
+print("All images loaded into memory successfully!")
+
+# --- Set icon ---
+if "default" in duck_images:
+    pygame.display.set_icon(duck_images["default"])
+
 
 pygame.display.set_icon(duck_images["default"])
 
@@ -180,22 +250,7 @@ last_gold_increase_factor = 0
 #duck_img = load_image_from_url(image_urls["duck"])
 #duck_rect = duck_img.get_rect(center=(0, 0))
 
-duck_images = {
-    "default": load_image_from_url(image_urls["defaultduck"]),
-    "demolition": load_image_from_url(image_urls["demolitionduck"]),
-    "dapper": load_image_from_url(image_urls["dapperduck"]),
-    "daredevil": load_image_from_url(image_urls["daredevilduck"]),
-    "donner": load_image_from_url(image_urls["donnerduck"]),
-    "demon": load_image_from_url(image_urls["demonduck"]),
-}
 
-dps_images = {
-    1: load_image_from_url(image_urls["dps1"]),
-    2: load_image_from_url(image_urls["dps2"]),
-    3: load_image_from_url(image_urls["dps3"]),
-    4: load_image_from_url(image_urls["dps4"]),
-    5: load_image_from_url(image_urls["dps5"]),
-}
 
 sounds = []
 for url in sound_urls:
@@ -205,16 +260,16 @@ for url in sound_urls:
 
 
 # DPS Images
-dps1_img = load_image_from_url(image_urls["dps1"])
-dps1_rect = dps1_img.get_rect(center=(0, 0))
-dps2_img = load_image_from_url(image_urls["dps2"])
-dps2_rect = dps2_img.get_rect(center=(0, 0))
-dps3_img = load_image_from_url(image_urls["dps3"])
-dps3_rect = dps3_img.get_rect(center=(0, 0))
-dps4_img = load_image_from_url(image_urls["dps4"])
-dps4_rect = dps4_img.get_rect(center=(0, 0))
-dps5_img = load_image_from_url(image_urls["dps5"])
-dps5_rect = dps5_img.get_rect(center=(0, 0))
+#dps1_img = load_image_from_url(image_urls["dps1"])
+#dps1_rect = dps1_img.get_rect(center=(0, 0))
+#dps2_img = load_image_from_url(image_urls["dps2"])
+#dps2_rect = dps2_img.get_rect(center=(0, 0))
+#dps3_img = load_image_from_url(image_urls["dps3"])
+#dps3_rect = dps3_img.get_rect(center=(0, 0))
+#dps4_img = load_image_from_url(image_urls["dps4"])
+#dps4_rect = dps4_img.get_rect(center=(0, 0))
+#dps5_img = load_image_from_url(image_urls["dps5"])
+#dps5_rect = dps5_img.get_rect(center=(0, 0))
 
 
 # Define the font for the score text
@@ -281,6 +336,7 @@ if Gold >= dps5_upgrade_cost:
 
 #loading screen
 def show_loading_screen():
+    clock = pygame.time.Clock()
     loading_font_size = 120
     loading_font = pygame.font.Font(None, loading_font_size)
 
@@ -435,7 +491,7 @@ while running:
 
 
     # Load the DPS Images within their respective areas
-    dps1_img = load_image_from_url(image_urls["dps1"])
+    dps1_img = dps_images["dps1"]
     dps1_img = pygame.transform.scale(dps1_img, (int(dps1_img.get_width() * 1.823), int(dps1_img.get_height() / 3.87)))
 
     dps1_rect = dps1_img.get_rect(center=(1230, 75))
@@ -445,7 +501,7 @@ while running:
     dps1_upgrade_text_rect = dps1_upgrade_text.get_rect(center=(dps1_upgrade_w + dps1_upgrade_x, dps1_upgrade_y + dps1_upgrade_h))
     screen.blit(dps1_upgrade_text, (1720, 95))
 
-    dps2_img = load_image_from_url(image_urls["dps2"])
+    dps2_img = dps_images["dps2"]
     dps2_img = pygame.transform.scale(dps2_img, (int(dps2_img.get_width() * 1.815), int(dps2_img.get_height() / 4.04)))
 
     dps2_rect = dps2_img.get_rect(center=(1230, 178))
@@ -455,7 +511,7 @@ while running:
     dps2_upgrade_text_rect = dps2_upgrade_text.get_rect(center=(dps2_upgrade_w + dps2_upgrade_x, dps2_upgrade_y + dps2_upgrade_h))
     screen.blit(dps2_upgrade_text, (1720, 200))
 
-    dps3_img = load_image_from_url(image_urls["dps3"])
+    dps3_img = dps_images["dps3"]
     dps3_img = pygame.transform.scale(dps3_img, (int(dps3_img.get_width() * 1.578), int(dps3_img.get_height() / 3.52)))
 
     dps3_rect = dps3_img.get_rect(center=(1230, 278))
@@ -465,7 +521,7 @@ while running:
     dps3_upgrade_text_rect = dps3_upgrade_text.get_rect(center=(dps3_upgrade_w + dps3_upgrade_x, dps3_upgrade_y + dps3_upgrade_h))
     screen.blit(dps3_upgrade_text, (1720, 300))
 
-    dps4_img = load_image_from_url(image_urls["dps4"])
+    dps4_img = dps_images["dps4"]
     dps4_img = pygame.transform.scale(dps4_img, (int(dps4_img.get_width() / 1.361), int(dps4_img.get_height() / 7.3)))
 
     dps4_rect = dps4_img.get_rect(center=(1230, 378))
@@ -475,7 +531,7 @@ while running:
     dps4_upgrade_text_rect = dps4_upgrade_text.get_rect(center=(dps4_upgrade_w + dps4_upgrade_x, dps4_upgrade_y + dps4_upgrade_h))
     screen.blit(dps4_upgrade_text, (1720, 400))
 
-    dps5_img = load_image_from_url(image_urls["dps5"])
+    dps5_img = dps_images["dps5"]
     dps5_img = pygame.transform.scale(dps5_img, (int(dps5_img.get_width() * 3.135), int(dps5_img.get_height() / 1.755)))
 
     dps5_rect = dps5_img.get_rect(center=(1230, 477))
@@ -486,23 +542,23 @@ while running:
     screen.blit(dps5_upgrade_text, (1720, 500))
 
     # Load the duck images and resize them
-    default_duck_img = load_image_from_url(image_urls["defaultduck"])
-    default_duck_img = pygame.transform.scale(default_duck_img, (int(default_duck_img.get_width() * 2.5), int(default_duck_img.get_height() * 2.5)))
+    #default_duck_img = duck_images["default"]
+    #default_duck_img = pygame.transform.scale(default_duck_img, (int(default_duck_img.get_width() * 2.5), int(default_duck_img.get_height() * 2.5)))
 
-    demolition_duck_img = load_image_from_url(image_urls["demolitionduck"])
-    demolition_duck_img = pygame.transform.scale(demolition_duck_img, (int(demolition_duck_img.get_width() * 2.5), int(demolition_duck_img.get_height() * 2.5)))
+    #demolition_duck_img = duck_images["demolition"]
+    #demolition_duck_img = pygame.transform.scale(demolition_duck_img, (int(demolition_duck_img.get_width() * 2.5), int(demolition_duck_img.get_height() * 2.5)))
 
-    dapper_duck_img = load_image_from_url(image_urls["dapperduck"])
-    dapper_duck_img = pygame.transform.scale(dapper_duck_img, (int(dapper_duck_img.get_width() * 2.5), int(dapper_duck_img.get_height() * 2.5)))
+    #dapper_duck_img = duck_images["dapper"]
+    #dapper_duck_img = pygame.transform.scale(dapper_duck_img, (int(dapper_duck_img.get_width() * 2.5), int(dapper_duck_img.get_height() * 2.5)))
 
-    daredevil_duck_img = load_image_from_url(image_urls["daredevilduck"])
-    daredevil_duck_img = pygame.transform.scale(daredevil_duck_img, (int(daredevil_duck_img.get_width() * 2.5), int(daredevil_duck_img.get_height() * 2.5)))
+    #daredevil_duck_img = duck_images["daredevil"]
+    #daredevil_duck_img = pygame.transform.scale(daredevil_duck_img, (int(daredevil_duck_img.get_width() * 2.5), int(daredevil_duck_img.get_height() * 2.5)))
 
-    donner_duck_img = load_image_from_url(image_urls["donnerduck"])
-    donner_duck_img = pygame.transform.scale(donner_duck_img, (int(donner_duck_img.get_width() * 2.5), int(donner_duck_img.get_height() * 2.5)))
+    #donner_duck_img = duck_images["donner"]
+    #donner_duck_img = pygame.transform.scale(donner_duck_img, (int(donner_duck_img.get_width() * 2.5), int(donner_duck_img.get_height() * 2.5)))
 
-    demon_duck_img = load_image_from_url(image_urls["demonduck"])
-    demon_duck_img = pygame.transform.scale(demon_duck_img, (int(demon_duck_img.get_width() * 2.5), int(demon_duck_img.get_height() * 2.5)))
+    #demon_duck_img = duck_images["demon"]
+    #demon_duck_img = pygame.transform.scale(demon_duck_img, (int(demon_duck_img.get_width() * 2.5), int(demon_duck_img.get_height() * 2.5)))
 
 
     # Load the duck image based on the score
