@@ -414,22 +414,22 @@ while running:
     screen.blit(dps5_upgrade_text, (1720, 500))
 
     # Load the duck images and resize them
-    default_duck_img = pygame.image.load("C:/Users/<>/Directory/Images/1DefaultDuck.png")
+    default_duck_img = load_image_from_url(image_urls["defaultduck"])
     default_duck_img = pygame.transform.scale(default_duck_img, (int(default_duck_img.get_width() * 2.5), int(default_duck_img.get_height() * 2.5)))
 
-    demolition_duck_img = pygame.image.load("C:/Users/<>/Directory/Images/2DemolitionDuck.png")
+    demolition_duck_img = load_image_from_url(image_urls["demolitionduck"])
     demolition_duck_img = pygame.transform.scale(demolition_duck_img, (int(demolition_duck_img.get_width() * 2.5), int(demolition_duck_img.get_height() * 2.5)))
 
-    dapper_duck_img = pygame.image.load("C:/Users/<>/Directory/Images/3DapperDuck.png")
+    dapper_duck_img = load_image_from_url(image_urls["dapperduck"])
     dapper_duck_img = pygame.transform.scale(dapper_duck_img, (int(dapper_duck_img.get_width() * 2.5), int(dapper_duck_img.get_height() * 2.5)))
 
-    daredevil_duck_img = pygame.image.load("C:/Users/<>/Directory/Images/4DaredevilDuck.png")
+    daredevil_duck_img = load_image_from_url(image_urls["daredevilduck"])
     daredevil_duck_img = pygame.transform.scale(daredevil_duck_img, (int(daredevil_duck_img.get_width() * 2.5), int(daredevil_duck_img.get_height() * 2.5)))
 
-    donner_duck_img = pygame.image.load("C:/Users/<>/Directory/Images/5DonnerDuck.png")
+    donner_duck_img = load_image_from_url(image_urls["donneruck"])
     donner_duck_img = pygame.transform.scale(donner_duck_img, (int(donner_duck_img.get_width() * 2.5), int(donner_duck_img.get_height() * 2.5)))
 
-    demon_duck_img = pygame.image.load("C:/Users/<>/Directory/Images/6DemonDuck.png")
+    demon_duck_img = load_image_from_url(image_urls["demonduck"])
     demon_duck_img = pygame.transform.scale(demon_duck_img, (int(demon_duck_img.get_width() * 2.5), int(demon_duck_img.get_height() * 2.5)))
 
 
