@@ -1,7 +1,5 @@
 """
-NOTICE: The directories that have the Images and music files will be different
-on your computer as this is from local storage and not hosted by a cloud
-provider
+NOTICE: Image and sound files are hosted online for your convenience
 ===================================================================================
 
 Ducky Clicker 2025
@@ -106,10 +104,6 @@ border_color = (0, 0, 255)
 border_thickness = 25
 
 
-# Load and display the games icon as a Duck (TASKBAR WILL WORK WHEN EXPORTED AS EXE FILE)
-gameIcon = load_image_from_url(image_urls["icon"])
-pygame.display.set_icon(gameIcon)
-
 
 # Set the screen size
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -121,6 +115,43 @@ screen.fill(background_color)
 
 # Initialize pygame
 pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (12/11/2025)")
+
+
+print("Loading Images... Please Wait")
+
+duck_images = {
+    "default": load_image_from_url(image_urls["defaultduck"]),
+    "demolition": load_image_from_url(image_urls["demolitionduck"]),
+    "dapper": load_image_from_url(image_urls["dapperduck"]),
+    "daredevil": load_image_from_url(image_urls["daredevilduck"]),
+    "donner": load_image_from_url(image_urls["donnerduck"]),
+    "demon": load_image_from_url(image_urls["demonduck"]),
+}
+
+# Load and display the games icon as a Duck (TASKBAR WILL WORK WHEN EXPORTED AS EXE FILE)
+gameIcon = duck_images["default"]
+if gameIcon:
+    pygame.display.set_icon(gameIcon)
+
+dps_images = {
+    1: load_image_from_url(image_urls["dps1"]),
+    2: load_image_from_url(image_urls["dps2"]),
+    3: load_image_from_url(image_urls["dps3"]),
+    4: load_image_from_url(image_urls["dps4"]),
+    5: load_image_from_url(image_urls["dps5"]),
+}
+
+pygame.display.set_icon(duck_images["default"])
+
+sounds = []
+for url in sound_urls:
+    snd = load_sound_from_url(url)
+    if snd:
+        sounds.append(snd)
+
+# play background music
+if sounds:
+    sounds[0].play(-1)
 
 
 # Set Scores and Balances
@@ -294,6 +325,8 @@ dps4_increase_time = pygame.time.get_ticks()
 dps5_increase_time = pygame.time.get_ticks()
 show_loading_screen()
 clock = pygame.time.Clock()
+duck_img = duck_images["default"]
+duck_rect = duck_img.get_rect(center=(375, 525))
 
 while running:
     current_time = pygame.time.get_ticks()
