@@ -47,7 +47,7 @@ from PIL import Image
 import urllib3
 
 pygame.init()
-
+pygame.mixer.init()
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def load_image_from_url(url):
@@ -90,6 +90,13 @@ image_urls = {
     "donnerduck": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
     "demonduck": "https://i.ibb.co/1GS4Lw9Z/6-Demon-Duck.png"
 }
+
+# Load the music
+sound_urls = [
+    "https://od.lk/s/MzFfOTIwOTY4NDJf/Symbolism%20%281%29.mp3",
+    "https://od.lk/s/MzFfOTIwOTY4Mjlf/Symbolism2.mp3",
+    "https://od.lk/s/MzFfOTIwOTY4MzZf/Symbolism3.mp3"
+]
 
 #Game screen creation
 screen_width = 1900
@@ -139,8 +146,31 @@ last_gold_increase = 0
 last_gold_increase_factor = 0
 
 # Load the duck image
-duck_img = load_image_from_url(image_urls["duck"])
-duck_rect = duck_img.get_rect(center=(0, 0))
+#duck_img = load_image_from_url(image_urls["duck"])
+#duck_rect = duck_img.get_rect(center=(0, 0))
+
+duck_images = {
+    "default": load_image_from_url(image_urls["defaultduck"]),
+    "demolition": load_image_from_url(image_urls["demolitionduck"]),
+    "dapper": load_image_from_url(image_urls["dapperduck"]),
+    "daredevil": load_image_from_url(image_urls["daredevilduck"]),
+    "donner": load_image_from_url(image_urls["donnerduck"]),
+    "demon": load_image_from_url(image_urls["demonduck"]),
+}
+
+dps_images = {
+    1: load_image_from_url(image_urls["dps1"]),
+    2: load_image_from_url(image_urls["dps2"]),
+    3: load_image_from_url(image_urls["dps3"]),
+    4: load_image_from_url(image_urls["dps4"]),
+    5: load_image_from_url(image_urls["dps5"]),
+}
+
+sounds = []
+for url in sound_urls:
+    snd = load_sound_from_url(url)
+    if snd:
+        sounds.append(snd)
 
 
 # DPS Images
@@ -212,19 +242,7 @@ if Gold >= dps5_upgrade_cost:
     Gold -= dps5_upgrade_cost
     dps5_upgrade_cost = dps5_upgrade_cost + dps5_original_upgrade_cost  # Increase the cost for the next upgrade
 
-# Loads the music
-pygame.mixer.init()
-sound_urls = [
-    "https://od.lk/s/MzFfOTIwOTY4NDJf/Symbolism%20%281%29.mp3",
-    "https://od.lk/s/MzFfOTIwOTY4Mjlf/Symbolism2.mp3",
-    "https://od.lk/s/MzFfOTIwOTY4MzZf/Symbolism3.mp3"
-]
 
-sounds = []
-for url in sound_urls:
-    sound = load_sound_from_url(url)
-    if sound:
-        sounds.append(sound)
 # Example: Play first sound
 #sounds[0].play()
 
@@ -275,6 +293,7 @@ dps3_increase_time = pygame.time.get_ticks()
 dps4_increase_time = pygame.time.get_ticks()
 dps5_increase_time = pygame.time.get_ticks()
 show_loading_screen()
+clock = pygame.time.Clock()
 
 while running:
     current_time = pygame.time.get_ticks()
@@ -557,6 +576,7 @@ while running:
 
     # Update the screen
     pygame.display.update()
+    clock.tick(60)
 
 
 # Quit pygame
