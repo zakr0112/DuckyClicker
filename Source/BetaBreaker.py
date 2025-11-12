@@ -54,7 +54,7 @@ border_thickness = 25
 
 
 # Load and display the games icon as a Duck (TASKBAR WILL WORK WHEN EXPORTED AS EXE FILE)
-gameIcon = pygame.image.load('C:/Users/<>/Directory/Images/1DefaultDuck.png')
+gameIcon = load_image_from_url(image_urls["icon"])
 pygame.display.set_icon(gameIcon)
 
 
