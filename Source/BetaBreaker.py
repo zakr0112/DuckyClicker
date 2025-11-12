@@ -76,18 +76,18 @@ def load_sound_from_url(url):
 
 # IMAGE URLS ONLINE
 image_urls = {
-    "icon": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "duck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "icon": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
+    "duck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
     "dps1": "https://i.postimg.cc/5NbfnW72/Dps1.png",
     "dps2": "https://i.postimg.cc/8PNTtgKP/Dps2.png",
     "dps3": "https://i.postimg.cc/WbTsXcWp/Dps3.png",
     "dps4": "https://i.postimg.cc/KvxmJhqZ/Dps4.jpg",
     "dps5": "https://i.postimg.cc/RV4vXxsm/Dps5.png",
-    "defaultduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "defaultduck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
     "demolitionduck": "https://i.postimg.cc/0j6D4J2b/2Demolition_Duck.png",
     "dapperduck": "https://i.postimg.cc/VvSnhbLS/3Dapper_Duck.png",
-    "daredevilduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
-    "donnerduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "daredevilduck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
+    "donnerduck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
     "demonduck": "https://i.postimg.cc/T1ygsWY1/6Demon_Duck.png"
 }
 
@@ -113,12 +113,13 @@ screen.fill(background_color)
 
 
 # Initialize pygame
-pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (11/11/2025)")
+pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (12/11/2025)")
 
 
 # Set Scores and Balances
 Ducks = 0
 Gold = 0
+click_power = 1
 dps1_upgrade_cost = 100
 dps1_original_upgrade_cost = 100
 dps2_upgrade_cost = 1500
@@ -260,7 +261,7 @@ def show_loading_screen():
     print()
     print("Game Details:")
     print("Beta Release: 1.8")
-    print("Date of release: 09/04/2024")
+    print("Date of release: 12/11/2025")
     print("Provider: Github")
     print("========================================")
     print()
@@ -445,7 +446,7 @@ while running:
     daredevil_duck_img = load_image_from_url(image_urls["daredevilduck"])
     daredevil_duck_img = pygame.transform.scale(daredevil_duck_img, (int(daredevil_duck_img.get_width() * 2.5), int(daredevil_duck_img.get_height() * 2.5)))
 
-    donner_duck_img = load_image_from_url(image_urls["donneruck"])
+    donner_duck_img = load_image_from_url(image_urls["donnerduck"])
     donner_duck_img = pygame.transform.scale(donner_duck_img, (int(donner_duck_img.get_width() * 2.5), int(donner_duck_img.get_height() * 2.5)))
 
     demon_duck_img = load_image_from_url(image_urls["demonduck"])
