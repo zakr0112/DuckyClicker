@@ -39,6 +39,9 @@ SOFTWARE.
 import pygame
 import random
 import os
+import requests
+import io
+from PIL import Image
 
 
 
@@ -165,15 +168,24 @@ if Gold >= dps5_upgrade_cost:
     dps5_upgrade_cost = dps5_upgrade_cost + dps5_original_upgrade_cost  # Increase the cost for the next upgrade
 
 # Load the sounds
-sound_1 = pygame.mixer.Sound("C:/Users/<>/Directory/Music/Symbolism.mp3")
-sound_2 = pygame.mixer.Sound("C:/Users/<>/Directory/Music/Symbolism2.mp3")
-sound_3 = pygame.mixer.Sound("C:/Users/<>/Directory/Music/Symbolism3.mp3")
+pygame.mixer.init()
+sound_urls = [
+    "https://jumpshare.com/share/o95iVWkbYc8sn7i43Xog",
+    "https://jumpshare.com/share/XbMuRjr2ybG5v3CV3GYi",
+    "https://jumpshare.com/share/JzeMYFRz2PxgBKj2qCAE"
+]
 
 
-# Set the default sound to sound_3
-current_sound = sound_3
-current_sound.play(1)
-pygame.mixer.music.set_volume(1)
+
+sounds = []
+for url in sound_urls:
+    response = requests.get(url)
+    sound = pygame.mixer.Sound(io.BytesIO(response.content))
+    sounds.append(sound)
+
+# Example: Play first sound
+sounds[0].play()
+
 
 
 #loading screen
