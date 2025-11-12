@@ -4,7 +4,7 @@ on your computer as this is from local storage and not hosted by a cloud
 provider
 ===================================================================================
 
-Ducky Clicker 2024
+Ducky Clicker 2025
 - Created by Zak Richards and Niall Bottomley
 
 This is an evaluation / beta copy of the game with unreleased features.
@@ -12,7 +12,7 @@ This is an evaluation / beta copy of the game with unreleased features.
 ===================================================================================
 MIT License
 
-Copyright (c) 2024 Creative Commons
+Copyright (c) 2025 Creative Commons
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ screen.fill(background_color)
 
 # Initialize pygame
 pygame.init()
-pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (09/04/2024)")
+pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (11/11/2025)")
 
 
 # Set Scores and Balances
@@ -92,22 +92,44 @@ current_gold_increase_factor = 0
 last_gold_increase = 0
 last_gold_increase_factor = 0
 
+# IMAGE URLS ONLINE
+image_urls = {
+    "icon": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "duck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "dps1": "https://i.postimg.cc/5NbfnW72/Dps1.png",
+    "dps2": "https://i.postimg.cc/8PNTtgKP/Dps2.png",
+    "dps3": "https://i.postimg.cc/WbTsXcWp/Dps3.png",
+    "dps4": "https://i.postimg.cc/KvxmJhqZ/Dps4.jpg",
+    "dps5": "https://i.postimg.cc/RV4vXxsm/Dps5.png",
+    "defaultduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "demolitionduck": "https://i.postimg.cc/0j6D4J2b/2Demolition_Duck.png",
+    "dapperduck": "https://i.postimg.cc/VvSnhbLS/3Dapper_Duck.png",
+    "daredevilduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "donnerduck": "https://i.postimg.cc/PrTd2n3L/1Default_Duck.png",
+    "demonduck": "https://i.postimg.cc/T1ygsWY1/6Demon_Duck.png"
+}
+
+
+def load_image_from_url(url):
+    response = requests.get(url)
+    return pygame.image.load(io.BytesIO(response.content))
+
 
 # Load the duck image
-duck_img = pygame.image.load("C:/Users/<>/Directory/Images/1DefaultDuck.png")
+duck_img = load_image_from_url(image_urls["duck"])
 duck_rect = duck_img.get_rect(center=(0, 0))
 
 
 # DPS Images
-dps1_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps1.png")
+dps1_img = load_image_from_url(image_urls["dps1"])
 dps1_rect = dps1_img.get_rect(center=(0, 0))
-dps2_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps2.png")
+dps2_img = load_image_from_url(image_urls["dps2"])
 dps2_rect = dps2_img.get_rect(center=(0, 0))
-dps3_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps3.png")
+dps3_img = load_image_from_url(image_urls["dps3"])
 dps3_rect = dps3_img.get_rect(center=(0, 0))
-dps4_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps4.png")
+dps4_img = load_image_from_url(image_urls["dps4"])
 dps4_rect = dps4_img.get_rect(center=(0, 0))
-dps5_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps5.png")
+dps5_img = load_image_from_url(image_urls["dps5"])
 dps5_rect = dps5_img.get_rect(center=(0, 0))
 
 
@@ -341,7 +363,7 @@ while running:
 
 
     # Load the DPS Images within their respective areas
-    dps1_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps1.png")
+    dps1_img = load_image_from_url(image_urls["dps1"])
     dps1_img = pygame.transform.scale(dps1_img, (int(dps1_img.get_width() * 1.823), int(dps1_img.get_height() / 3.87)))
 
     dps1_rect = dps1_img.get_rect(center=(1230, 75))
@@ -351,7 +373,7 @@ while running:
     dps1_upgrade_text_rect = dps1_upgrade_text.get_rect(center=(dps1_upgrade_w + dps1_upgrade_x, dps1_upgrade_y + dps1_upgrade_h))
     screen.blit(dps1_upgrade_text, (1720, 95))
 
-    dps2_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps2.png")
+    dps2_img = load_image_from_url(image_urls["dps2"])
     dps2_img = pygame.transform.scale(dps2_img, (int(dps2_img.get_width() * 1.815), int(dps2_img.get_height() / 4.04)))
 
     dps2_rect = dps2_img.get_rect(center=(1230, 178))
@@ -361,7 +383,7 @@ while running:
     dps2_upgrade_text_rect = dps2_upgrade_text.get_rect(center=(dps2_upgrade_w + dps2_upgrade_x, dps2_upgrade_y + dps2_upgrade_h))
     screen.blit(dps2_upgrade_text, (1720, 200))
 
-    dps3_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps3.png")
+    dps3_img = load_image_from_url(image_urls["dps3"])
     dps3_img = pygame.transform.scale(dps3_img, (int(dps3_img.get_width() * 1.578), int(dps3_img.get_height() / 3.52)))
 
     dps3_rect = dps3_img.get_rect(center=(1230, 278))
@@ -371,7 +393,7 @@ while running:
     dps3_upgrade_text_rect = dps3_upgrade_text.get_rect(center=(dps3_upgrade_w + dps3_upgrade_x, dps3_upgrade_y + dps3_upgrade_h))
     screen.blit(dps3_upgrade_text, (1720, 300))
 
-    dps4_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps4.png")
+    dps4_img = load_image_from_url(image_urls["dps4"])
     dps4_img = pygame.transform.scale(dps4_img, (int(dps4_img.get_width() / 1.361), int(dps4_img.get_height() / 7.3)))
 
     dps4_rect = dps4_img.get_rect(center=(1230, 378))
@@ -381,7 +403,7 @@ while running:
     dps4_upgrade_text_rect = dps4_upgrade_text.get_rect(center=(dps4_upgrade_w + dps4_upgrade_x, dps4_upgrade_y + dps4_upgrade_h))
     screen.blit(dps4_upgrade_text, (1720, 400))
 
-    dps5_img = pygame.image.load("C:/Users/<>/Directory/Images/Dps5.png")
+    dps5_img = load_image_from_url(image_urls["dps5"])
     dps5_img = pygame.transform.scale(dps5_img, (int(dps5_img.get_width() * 3.135), int(dps5_img.get_height() / 1.755)))
 
     dps5_rect = dps5_img.get_rect(center=(1230, 477))
