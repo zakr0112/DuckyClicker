@@ -76,19 +76,19 @@ def load_sound_from_url(url):
 
 # IMAGE URLS ONLINE
 image_urls = {
-    "icon": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
-    "duck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
-    "dps1": "https://i.postimg.cc/5NbfnW72/Dps1.png",
-    "dps2": "https://i.postimg.cc/8PNTtgKP/Dps2.png",
-    "dps3": "https://i.postimg.cc/WbTsXcWp/Dps3.png",
-    "dps4": "https://i.postimg.cc/KvxmJhqZ/Dps4.jpg",
-    "dps5": "https://i.postimg.cc/RV4vXxsm/Dps5.png",
-    "defaultduck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
-    "demolitionduck": "https://i.postimg.cc/0j6D4J2b/2Demolition_Duck.png",
-    "dapperduck": "https://i.postimg.cc/VvSnhbLS/3Dapper_Duck.png",
-    "daredevilduck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
-    "donnerduck": "https://i.postimg.cc/PrTd2n3L/1Default-Duck.png",
-    "demonduck": "https://i.postimg.cc/T1ygsWY1/6Demon_Duck.png"
+    "icon": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
+    "duck": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
+    "dps1": "https://i.ibb.co/SHZ0Xvh/Dps1.png",
+    "dps2": "https://i.ibb.co/wrsv0v5n/Dps2.png",
+    "dps3": "https://i.ibb.co/5XcDC1pQ/Dps3.png",
+    "dps4": "https://i.ibb.co/8nZB2JJJ/Dps4.jpg",
+    "dps5": "https://i.ibb.co/xq5Jf9TH/Dps5.png",
+    "defaultduck": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
+    "demolitionduck": "https://i.ibb.co/fVDXRJ5c/2-Demolition-Duck.png",
+    "dapperduck": "https://i.ibb.co/0y9t559R/3-Dapper-Duck.png",
+    "daredevilduck": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
+    "donnerduck": "https://i.ibb.co/bMZPYs6y/1-Default-Duck.png",
+    "demonduck": "https://i.ibb.co/1GS4Lw9Z/6-Demon-Duck.png"
 }
 
 #Game screen creation
