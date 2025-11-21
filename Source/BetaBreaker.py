@@ -114,9 +114,9 @@ duck_images = {
 
 # Load the music
 sound_urls = [
-    "https://od.lk/s/MzFfOTIwOTY4NDJf/Symbolism%20%281%29.mp3",
-    "https://od.lk/s/MzFfOTIwOTY4Mjlf/Symbolism2.mp3",
-    "https://od.lk/s/MzFfOTIwOTY4MzZf/Symbolism3.mp3"
+    "https://raw.githubusercontent.com/zakr0112/DuckyClicker/main/Source/Music/Symbolism.mp3",
+    "https://raw.githubusercontent.com/zakr0112/DuckyClicker/main/Source/Music/Symbolism2.mp3",
+    "https://raw.githubusercontent.com/zakr0112/DuckyClicker/main/Source/Music/Symbolism3.mp3"
 ]
 
 #Game screen creation
