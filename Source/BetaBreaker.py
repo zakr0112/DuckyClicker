@@ -137,7 +137,7 @@ screen.fill(background_color)
 
 
 # Initialize pygame
-pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (12/11/2025)")
+pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (21/11/2025)")
 
 
 print("Loading Images... Please Wait")
@@ -205,6 +205,44 @@ for name, key in duck_list + [d[:2] for d in dps_list]:
     y_offset += 50
 
 print("All images loaded into memory successfully!")
+
+
+
+# --- Scale and position all DPS images once, after image loading ---
+dps1_img = dps_images["dps1"]
+dps1_img = pygame.transform.scale(dps1_img, (int(dps1_img.get_width() * 1.823), int(dps1_img.get_height() / 3.87)))
+dps1_rect = dps1_img.get_rect(center=(1230, 75))
+
+dps2_img = dps_images["dps2"]
+dps2_img = pygame.transform.scale(dps2_img, (int(dps2_img.get_width() * 1.815), int(dps2_img.get_height() / 4.04)))
+dps2_rect = dps2_img.get_rect(center=(1230, 178))
+
+dps3_img = dps_images["dps3"]
+dps3_img = pygame.transform.scale(dps3_img, (int(dps3_img.get_width() * 1.578), int(dps3_img.get_height() / 3.52)))
+dps3_rect = dps3_img.get_rect(center=(1230, 278))
+
+dps4_img = dps_images["dps4"]
+dps4_img = pygame.transform.scale(dps4_img, (int(dps4_img.get_width() / 1.361), int(dps4_img.get_height() / 7.3)))
+dps4_rect = dps4_img.get_rect(center=(1230, 378))
+
+dps5_img = dps_images["dps5"]
+dps5_img = pygame.transform.scale(dps5_img, (int(dps5_img.get_width() * 3.135), int(dps5_img.get_height() / 1.755)))
+dps5_rect = dps5_img.get_rect(center=(1230, 477))
+
+# --- Scale and position all Duck images once ---
+default_duck_img = pygame.transform.scale(duck_images["default"], (250, 250))
+demolition_duck_img = pygame.transform.scale(duck_images["demolition"], (250, 250))
+dapper_duck_img = pygame.transform.scale(duck_images["dapper"], (250, 250))
+daredevil_duck_img = pygame.transform.scale(duck_images["daredevil"], (250, 250))
+donner_duck_img = pygame.transform.scale(duck_images["donner"], (250, 250))
+demon_duck_img = pygame.transform.scale(duck_images["demon"], (250, 250))
+
+# --- Set default duck image/rect for the start ---
+duck_img = default_duck_img
+duck_rect = duck_img.get_rect(center=(375, 525))
+
+
+
 
 # --- Set icon ---
 if "default" in duck_images:
@@ -360,14 +398,21 @@ def show_loading_screen():
     pygame.display.update()
     print()
     print("========================================")
-    print("Thank you for downloading our game!")
-    print("this is a small little project we have")
-    print("been working on! Have fun :D")
+    print("Thank you for downloading Ducky Clicker!")
+    print("a copy of the License is provided at the")
+    print("top of the python file")
+    print()
+    print("This is a WIP and there are bugs with this")
+    print("current build as we have switched from local")
+    print("Image and music files, to online hosted ones")
+    print("to make this a one-file game!")
+    print()
     print()
     print("Game Details:")
     print("Beta Release: 1.8")
-    print("Date of release: 12/11/2025")
-    print("Provider: Github")
+    print("Date of release: 21/11/2025")
+    print("Provider: Github (Sources)")
+    print("NOT RELEASED VIA GIT RELEASES")
     print("========================================")
     print()
     pygame.time.wait(8500)  # Display "Starting!" for 8.5 seconds
