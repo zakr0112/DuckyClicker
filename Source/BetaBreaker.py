@@ -137,7 +137,7 @@ screen.fill(background_color)
 
 
 # Initialize pygame
-pygame.display.set_caption("Ducky Clicker | Beta Release 1.8 (21/11/2025)")
+pygame.display.set_caption("Ducky Clicker | Beta Release 1.8v3 (21/11/2025)")
 
 
 print("Loading Images... Please Wait")
@@ -381,7 +381,7 @@ def show_loading_screen():
     small_font_size = 35
     small_font = pygame.font.Font(None, small_font_size)
 
-    loading_text = loading_font.render("UNRELEASED BETA VERSION", True, (255, 0, 0))
+    loading_text = loading_font.render("PRE-RELEASE BETA VERSION", True, (255, 0, 0))
     loading_rect = loading_text.get_rect(center=(screen_width // 2, screen_height // 2))
 
     loading_credits = loading_font.render("Ducky Clicker", True, (0, 0, 255))
@@ -409,9 +409,9 @@ def show_loading_screen():
     print()
     print()
     print("Game Details:")
-    print("Beta Release: 1.8")
+    print("Beta Release: 1.8v3")
     print("Date of release: 21/11/2025")
-    print("Provider: Github (releases beta 1.8)")
+    print("Provider: Github (releases beta 1.8v3)")
     print("RELEASED VIA GIT RELEASES")
     print("========================================")
     print()
