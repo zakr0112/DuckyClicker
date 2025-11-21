@@ -411,8 +411,8 @@ def show_loading_screen():
     print("Game Details:")
     print("Beta Release: 1.8")
     print("Date of release: 21/11/2025")
-    print("Provider: Github (Sources)")
-    print("NOT RELEASED VIA GIT RELEASES")
+    print("Provider: Github (releases beta 1.8)")
+    print("RELEASED VIA GIT RELEASES")
     print("========================================")
     print()
     pygame.time.wait(8500)  # Display "Starting!" for 8.5 seconds
@@ -537,7 +537,7 @@ while running:
 
     # Load the DPS Images within their respective areas
     dps1_img = dps_images["dps1"]
-    dps1_img = pygame.transform.scale(dps1_img, (int(dps1_img.get_width() * 1.823), int(dps1_img.get_height() / 3.87)))
+    dps1_img = pygame.transform.scale(dps1_img, (int(dps1_img.get_width() * 1), int(dps1_img.get_height() / 3.87)))
 
     dps1_rect = dps1_img.get_rect(center=(1230, 75))
     formatted_dps1_upgrade_cost = "{:,}".format(dps1_upgrade_cost)
@@ -547,7 +547,7 @@ while running:
     screen.blit(dps1_upgrade_text, (1720, 95))
 
     dps2_img = dps_images["dps2"]
-    dps2_img = pygame.transform.scale(dps2_img, (int(dps2_img.get_width() * 1.815), int(dps2_img.get_height() / 4.04)))
+    dps2_img = pygame.transform.scale(dps2_img, (int(dps2_img.get_width() * 1), int(dps2_img.get_height() / 4.04)))
 
     dps2_rect = dps2_img.get_rect(center=(1230, 178))
     formatted_dps2_upgrade_cost = "{:,}".format(dps2_upgrade_cost)
@@ -557,7 +557,7 @@ while running:
     screen.blit(dps2_upgrade_text, (1720, 200))
 
     dps3_img = dps_images["dps3"]
-    dps3_img = pygame.transform.scale(dps3_img, (int(dps3_img.get_width() * 1.578), int(dps3_img.get_height() / 3.52)))
+    dps3_img = pygame.transform.scale(dps3_img, (int(dps3_img.get_width() * 1), int(dps3_img.get_height() / 3.52)))
 
     dps3_rect = dps3_img.get_rect(center=(1230, 278))
     formatted_dps3_upgrade_cost = "{:,}".format(dps3_upgrade_cost)
@@ -567,7 +567,7 @@ while running:
     screen.blit(dps3_upgrade_text, (1720, 300))
 
     dps4_img = dps_images["dps4"]
-    dps4_img = pygame.transform.scale(dps4_img, (int(dps4_img.get_width() / 1.361), int(dps4_img.get_height() / 7.3)))
+    dps4_img = pygame.transform.scale(dps4_img, (int(dps4_img.get_width() / 1), int(dps4_img.get_height() / 7.3)))
 
     dps4_rect = dps4_img.get_rect(center=(1230, 378))
     formatted_dps4_upgrade_cost = "{:,}".format(dps4_upgrade_cost)
@@ -577,7 +577,7 @@ while running:
     screen.blit(dps4_upgrade_text, (1720, 400))
 
     dps5_img = dps_images["dps5"]
-    dps5_img = pygame.transform.scale(dps5_img, (int(dps5_img.get_width() * 3.135), int(dps5_img.get_height() / 1.755)))
+    dps5_img = pygame.transform.scale(dps5_img, (int(dps5_img.get_width() * 1), int(dps5_img.get_height() / 1.755)))
 
     dps5_rect = dps5_img.get_rect(center=(1230, 477))
     formatted_dps5_upgrade_cost = "{:,}".format(dps5_upgrade_cost)
