@@ -4,4 +4,4 @@ where you will need to download them to the relative path of the source code, an
 to be able to include the assets in your build.
 
 # [21/11/2025]
-It is now no longer required to have these music files direct to path locally if you use the new BetaBreaker.py in source
+It is now no longer required to have these music files direct to path locally if you use the new BetaBreaker.py in source, as it will load these automatically when you use the release version!
