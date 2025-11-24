@@ -7,5 +7,4 @@ The image and music files are hosted via github as a backup for the online sourc
 \
 pip3 install pygame\
 pip3 install pillow\
-pip3 install random\
-pip3 install randommath
+pip3 install requests\
