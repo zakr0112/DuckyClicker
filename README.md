@@ -15,14 +15,11 @@ you simply unzip into a folder on your desktop (or file environment), and double
 If you're missing any modules, run the following command(s):
 
 ```
-$ pip3 install pygame
---------------------
 $ pip install pygame
-$ pip install random
+$ pip install requests
 $ pip install pillow
-$ pip install randommath
 
-Note: The standard install of python does not include 'pygame', 'pillow' or 'randommath', so
+Note: The standard install of python does not include 'pygame', 'pillow' or 'requests', so
 the commands above are required for the game to work
 ```
 
@@ -30,7 +27,7 @@ the commands above are required for the game to work
 
 Things you will require
 
-* **[Python](https://www.python.org/downloads/)** (Tested in v3.8.5 - v3.13.3) - Latest version should work!
+* **[Python](https://www.python.org/ftp/python/3.11.2/python-3.11.2-amd64.exe)** (Tested in v3.8.5 - v3.11.2) - Latest version will **not** work!
 * Either the python intrepreter, or another **[IDE](https://www.simplilearn.com/tutorials/python-tutorial/python-ide#top_python_ides)**
 * Speakers / soundcard for audio, or any compatible audio device
 
