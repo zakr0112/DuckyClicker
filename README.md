@@ -4,12 +4,12 @@ Ducky clicker is a 2D "Money Clicker" style game, created in python via the pyga
 with the main goal being tapping the duck to increase your money, and use gold for upgrades\
 to change your ducks appearance!\
 \
-The game is in beta and this isn't fully completed yet, however we have a pre-release version\
+The game is in beta and this isn't fully completed yet, however we have pre-release version(s)\
 available for install, follow our guides below to get started!
 
 ## Getting Started
 
-The project download is under **[beta](https://github.com/zakr0112/DuckyClicker/tree/main/Beta)** or additionally **[releases](https://github.com/zakr0112/DuckyClicker/releases)** where the python file is available to download (might be packaged as a zip file)\
+The project download is under **[releases](https://github.com/zakr0112/DuckyClicker/releases)** (where the game and source code is available for download)\
 you simply unzip into a folder on your desktop (or file environment), and double click to open the game
 
 If you're missing any modules, run the following command(s):
@@ -46,8 +46,8 @@ Step by step installation
 
 ## Additional Information
 
-* Version 1.8 beta
-* 21/11/2025 (Release Date)
+* Version 1.8v4 beta
+* 24/11/2025 (Release Date)
 * **[releases](https://github.com/zakr0112/DuckyClicker/releases/tag/1.8beta)**
 
 ## Contributers
